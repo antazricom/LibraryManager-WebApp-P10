@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:property="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://cxf.apache.org/jaxws
+		http://cxf.apache.org/schemas/jaxws.xsd">
+
+    <context:component-scan base-package="com.antazri" />
+    <context:property-placeholder location="classpath:/com/antazri/service/cxf/cxf.properties" />
+
+    <!-- =============================================================== -->
+    <!-- Configuration des beans -->
+    <!-- =============================================================== -->
+    <!-- ===== SERVICE ===== -->
+    <bean id="authenticationClientService" class="com.antazri.service.impl.AuthenticationClientService" scope="prototype" />
+    <bean id="authorManagementClientService" class="com.antazri.service.impl.AuthorManagementClientService" scope="prototype" />
+    <bean id="bookManagementClientService" class="com.antazri.service.impl.BookManagementClientService" scope="prototype" />
+    <bean id="categoryManagementClientService" class="com.antazri.service.impl.CategoryManagementClientService" scope="prototype" />
+    <bean id="loanManagementClientService" class="com.antazri.service.impl.LoanManagementClientService" scope="prototype" />
+    <bean id="memberManagementClientService" class="com.antazri.service.impl.MemberManagementClientService" scope="prototype" />
+
+    <!-- =====  ===== -->
+    <jaxws:client id="authenticationService"
+                  serviceClass="com.antazri.service.impl.AuthenticationService"
+                  serviceName="AuthorManagementService" address="${ws.url.auth}"/>
+    <jaxws:client id="authorManagementService"
+                  serviceClass="com.antazri.service.impl.AuthorManagementService"
+                  serviceName="AuthorManagementService" address="${ws.url.author}"/>
+    <jaxws:client id="bookManagementService"
+                  serviceClass="com.antazri.service.impl.BookManagementService"
+                  serviceName="BookManagementService" address="${ws.url.book}"/>
+    <jaxws:client id="categoryManagementService"
+                  serviceClass="com.antazri.service.impl.CategoryManagementService"
+                  serviceName="CategoryManagementService" address="${ws.url.category}"/>
+    <jaxws:client id="loanManagementService"
+                  serviceClass="com.antazri.service.impl.LoanManagementService"
+                  serviceName="LoanManagementService" address="${ws.url.loan}"/>
+    <jaxws:client id="memberManagementService"
+                  serviceClass="com.antazri.service.impl.MemberManagementService"
+                  serviceName="MemberManagementService" address="${ws.url.member}"/>
+
+</beans>

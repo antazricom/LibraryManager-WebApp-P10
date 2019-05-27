@@ -29,7 +29,57 @@
                     <div class="menu">
                         <ul class="menu-list">
                             <c:forEach items="${loans}" var="loan">
-                                <li class="list-content"><a href="./details/${loan.id}">${loan.book.title}  [ Date de fin : ${loan.dateEnd} ]</a></li>
+                                <c:choose>
+                                    <c:when test="${loan.returned == false}">
+                                        <li class="list-content"><a href="./details/${loan.id}">${loan.book.title}<br />
+                                            Date de fin : ${loan.dateEnd.getDay()}/${loan.dateEnd.getMonth()}/${loan.dateEnd.getYear()}<br />
+                                            <c:choose>
+                                                <c:when test="${loan.returned}">
+                                                    Rendu : <i class="fas fa-check has-text-success"></i>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    Rendu : <i class="fas fa-times has-text-danger"></i>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </a></li>
+                                    </c:when>
+                                </c:choose>
+                            </c:forEach>
+                        </ul>
+                    </div>
+
+                </article>
+
+            </section>
+
+            <section>
+
+                <header>
+
+                    <h1>Historique des prêts</h1>
+
+                </header>
+
+                <article>
+
+                    <div class="menu">
+                        <ul class="menu-list">
+                            <c:forEach items="${loans}" var="loan">
+                                <c:choose>
+                                    <c:when test="${loan.returned == true}">
+                                        <li class="list-content"><a href="./details/${loan.id}">${loan.book.title}<br />
+                                            Date de fin : ${loan.dateEnd.getDay()}/${loan.dateEnd.getMonth()}/${loan.dateEnd.getYear()}<br />
+                                            <c:choose>
+                                                <c:when test="${loan.returned}">
+                                                    Rendu : <i class="fas fa-check has-text-success"></i>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    Rendu : <i class="fas fa-times has-text-danger"></i>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </a></li>
+                                    </c:when>
+                                </c:choose>
                             </c:forEach>
                         </ul>
                     </div>

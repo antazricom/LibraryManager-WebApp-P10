@@ -31,7 +31,7 @@
                             <div class="menu">
                                 <ul class="menu-list">
                                     <c:forEach items="${books}" var="book">
-                                        <li class="list-content"><a href="${pageContext.request.contextPath}/books/details/${book.id}">${book.title} (${book.publicationDate})</a></li>
+                                        <li class="list-content"><a href="${pageContext.request.contextPath}/books/details/${book.id}">${book.title} (${book.publicationDate.getYear()})</a></li>
                                     </c:forEach>
                                 </ul>
                             </div>

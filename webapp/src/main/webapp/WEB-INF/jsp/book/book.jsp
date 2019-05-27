@@ -31,8 +31,8 @@
                             <div class="menu">
                                 <ul class="menu-list">
                                     <li class="list-content"><a href="${pageContext.request.contextPath}/authors/details/${book.author.id}">Auteur : ${book.author.firstname} ${book.author.lastname}</a></li>
-                                    <li class="list-content">Date de publication : ${book.publicationDate}</li>
-                                    <li class="list-content"><a href="${pageContext.request.contextPath}/authors/details/${book.category.id}">Catégorie : ${book.category.title}</a></li>
+                                    <li class="list-content">Publié en : ${book.publicationDate.getYear()}</li>
+                                    <li class="list-content"><a href="${pageContext.request.contextPath}/categories/details/${book.category.id}">Catégorie : ${book.category.title}</a></li>
                                     <li class="list-content">Nombre de copies : ${book.copies}</li>
                                     <li class="list-content">Nombre de copies disponibles : ${copiesAvailable}</li>
                                 </ul>

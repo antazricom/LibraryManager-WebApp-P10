@@ -26,6 +26,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+        <!-- WebService URL -->
+        <ws.url>http://webservice:8090/webservice/ws</ws.url>
     </properties>
 
     <!-- =============================================================== -->
@@ -73,7 +76,7 @@
                             <sourceRoot>${basedir}/src/main/java/</sourceRoot>
                             <wsdlOptions>
                                 <wsdlOption>
-                                    <wsdl>http://localhost:8090/librarymanager/ws/auth?wsdl</wsdl>
+                                    <wsdl>${ws.url}/auth?wsdl</wsdl>
                                     <serviceName>AuthenticationService</serviceName>
                                     <extraargs>
                                         <extraarg>-client</extraarg>
@@ -83,7 +86,7 @@
                                      </extraargs>
                                  </wsdlOption>
                                  <wsdlOption>
-                                     <wsdl>http://localhost:8090/librarymanager/ws/author?wsdl</wsdl>
+                                     <wsdl>${ws.url}/author?wsdl</wsdl>
                                      <serviceName>AuthorManagementService</serviceName>
                                      <extraargs>
                                          <extraarg>-client</extraarg>
@@ -93,7 +96,7 @@
                                      </extraargs>
                                  </wsdlOption>
                                  <wsdlOption>
-                                     <wsdl>http://localhost:8090/librarymanager/ws/book?wsdl</wsdl>
+                                     <wsdl>${ws.url}/book?wsdl</wsdl>
                                      <serviceName>BookManagementService</serviceName>
                                      <extraargs>
                                          <extraarg>-client</extraarg>
@@ -103,7 +106,7 @@
                                      </extraargs>
                                  </wsdlOption>
                                  <wsdlOption>
-                                     <wsdl>http://localhost:8090/librarymanager/ws/category?wsdl</wsdl>
+                                     <wsdl>${ws.url}/category?wsdl</wsdl>
                                      <serviceName>CategoryManagementService</serviceName>
                                      <extraargs>
                                          <extraarg>-client</extraarg>
@@ -113,7 +116,7 @@
                                      </extraargs>
                                  </wsdlOption>
                                  <wsdlOption>
-                                     <wsdl>http://localhost:8090/librarymanager/ws/loan?wsdl</wsdl>
+                                     <wsdl>${ws.url}/loan?wsdl</wsdl>
                                      <serviceName>LoanManagementService</serviceName>
                                      <extraargs>
                                          <extraarg>-client</extraarg>
@@ -123,7 +126,7 @@
                                      </extraargs>
                                  </wsdlOption>
                                  <wsdlOption>
-                                     <wsdl>http://localhost:8090/librarymanager/ws/member?wsdl</wsdl>
+                                     <wsdl>${ws.url}/member?wsdl</wsdl>
                                      <serviceName>MemberManagementService</serviceName>
                                      <extraargs>
                                          <extraarg>-client</extraarg>
@@ -133,7 +136,7 @@
                                      </extraargs>
                                  </wsdlOption>
                                  <wsdlOption>
-                                     <wsdl>http://localhost:8090/librarymanager/ws/reminder?wsdl</wsdl>
+                                     <wsdl>${ws.url}/reminder?wsdl</wsdl>
                                      <serviceName>ReminderService</serviceName>
                                      <extraargs>
                                          <extraarg>-client</extraarg>

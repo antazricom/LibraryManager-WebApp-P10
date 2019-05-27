@@ -30,26 +30,43 @@
 
                             <div class="menu">
                                 <ul class="menu-list">
-                                    <li class="list-content"><a href="${pageContext.request.contextPath}/books/details/${loan.book.id}"><span class="has-text-weight-light"> Livre : </span>${loan.book.title}</a></li>
+                                    <li class="list-content">
+                                        <a href="${pageContext.request.contextPath}/books/details/${loan.book.id}">
+                                            <span class="has-text-weight-light"> Livre : </span>${loan.book.title}
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
 
                             <div class="menu">
                                 <ul class="menu-list">
-                                    <li class="list-content add-list-style"><span class="has-text-weight-light"> Date de début : </span>${loan.dateBegin}</li>
-                                    <li class="list-content add-list-style"><span class="has-text-weight-light"> Date de fin : </span>${loan.dateEnd}</li>
+                                    <li class="list-content add-list-style"><span class="has-text-weight-light">
+                                        Date de début : </span>
+                                            ${loan.dateBegin.getDay()}/${loan.dateBegin.getMonth()}/${loan.dateBegin.getYear()}
+                                    </li>
+                                    <li class="list-content add-list-style"><span class="has-text-weight-light">
+                                        Date de fin : </span>
+                                            ${loan.dateEnd.getDay()}/${loan.dateEnd.getMonth()}/${loan.dateEnd.getYear()}
+                                    </li>
                                 </ul>
                             </div>
 
                             <div class="menu">
                                 <ul class="menu-list">
-                                    <li class="list-content add-list-style"><span class="has-text-weight-light"> Date de retour attendu : </span>${loan.dateReturn}</li>
+                                    <li class="list-content add-list-style"><span class="has-text-weight-light">
+                                        Date de retour attendu : </span>
+                                            ${loan.dateReturn.getDay()}/${loan.dateReturn.getMonth()}/${loan.dateReturn.getYear()}
+                                    </li>
                                     <c:choose>
                                         <c:when test="${loan.returned}">
-                                            <li class="list-content add-list-style"><span class="has-text-weight-light"> Rendu : </span><i class="fas fa-check has-text-success"></i></li>
+                                            <li class="list-content add-list-style"><span class="has-text-weight-light">
+                                                Rendu : </span><i class="fas fa-check has-text-success"></i>
+                                            </li>
                                         </c:when>
                                         <c:otherwise>
-                                            <li class="list-content add-list-style"><span class="has-text-weight-light"> Rendu : </span><i class="fas fa-times has-text-danger"></i></li>
+                                            <li class="list-content add-list-style"><span class="has-text-weight-light">
+                                                Rendu : </span><i class="fas fa-times has-text-danger"></i>
+                                            </li>
                                         </c:otherwise>
                                     </c:choose>
                                 </ul>
@@ -88,7 +105,8 @@
 
                     <c:choose>
                         <c:when test="${loan.extended == false}">
-                            <p><span class="has-text-weight-light"> Le prêt sera étendu d'un mois à partir du :  </span><b>${loan.dateEnd}</b></p>
+                            <p><span class="has-text-weight-light"> Le prêt sera étendu d'un mois à partir du :  </span>
+                                <b>${loan.dateEnd.getDay()}/${loan.dateEnd.getMonth()}/${loan.dateEnd.getYear()}</b></p>
 
                             <a href="${pageContext.request.contextPath}/loans/extend/${loan.id}">
                                 <button class="button is-primary">Prolonger</button></a>

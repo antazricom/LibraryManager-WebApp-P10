@@ -3,6 +3,7 @@ package com.antazri.controller;
 import com.antazri.generated.auth.DoLoginRequest;
 import com.antazri.generated.loan.*;
 import com.antazri.service.impl.LoanManagementClientService;
+import com.antazri.utils.Message;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +69,8 @@ public class LoanController extends AbstractController {
             vResponse = loanManagementClientService.findByMember(vRequest);
         } catch (ConvertException pE) {
             logger.error("getAllLoans: Erreur dans la récupération des objets Loan");
-            return new ModelAndView("redirect:/error", "message", pE.getFaultInfo());
+
+            return new ModelAndView("redirect:/error", "message", pE.getFaultInfo().getFault().getFaultString());
         }
 
             return new ModelAndView("loan/loans", "loans", vResponse.getLoans());
@@ -94,12 +96,12 @@ public class LoanController extends AbstractController {
             vLoan = getLoanById(pId);
         } catch (NullPointerException pE) {
             logger.error("getLoanDetails: Erreur dans la récupération de Loan via l'ID : " + pId);
-            return new ModelAndView("redirect:/error", "message", pE.getCause().getMessage());
+            return returnError(Message.getText().getString("message.error.null"));
         }
 
 
         if (getSessionMemberToLoanManagement(pHttpRequest).getId() != vLoan.getMember().getId()) {
-            return new ModelAndView("redirect:/error", "message", "Vous n'êtes pas le propriétaire");
+            return returnError(Message.getText().getString("message.error.unauthorized"));
         }
 
         return new ModelAndView("loan/loan", "loan", vLoan);
@@ -127,15 +129,15 @@ public class LoanController extends AbstractController {
             vLoan = getLoanById(pId);
         } catch (NullPointerException pE) {
             logger.error("getLoanDetails: Erreur dans la récupération de Loan via l'ID : " + pId);
-            return returnError(pE.getCause().getMessage());
+            return returnError(Message.getText().getString("message.error.null"));
         }
 
         if (getSessionMemberToLoanManagement(pHttpRequest).getId() != vLoan.getMember().getId()) {
-            return returnError("Vous n'êtes pas le propriétaire");
+            return returnError(Message.getText().getString("message.error.unauthorized"));
         }
 
         if (vLoan.isExtended()) {
-            return returnError("Déjà prolongé");
+            return returnError(Message.getText().getString("message.error.already.extended"));
         }
 
         vRequest.setLoan(vLoan);
@@ -144,10 +146,10 @@ public class LoanController extends AbstractController {
             vResponse = loanManagementClientService.extendLoan(vRequest);
         } catch (ConvertException pConvertEx) {
             logger.error("postExtendLoan/ConvertException: Erreur dans l'extension du prêt");
-            return returnError(pConvertEx.getCause().getMessage());
+            return returnError(Message.getText().getString("message.error.default"));
         } catch (ExtendException pExtendEx) {
             logger.error("postExtendLoan/ExtendException: Erreur dans l'extension du prêt");
-            return returnError(pExtendEx.getCause().getMessage());
+            return returnError(Message.getText().getString("message.error.default"));
         }
 
         return new ModelAndView("redirect:/loans/details/" + vLoan.getId(), "loan", vResponse.getLoan());
@@ -175,15 +177,15 @@ public class LoanController extends AbstractController {
             vLoan = getLoanById(pId);
         } catch (NullPointerException pE) {
             logger.error("getLoanDetails: Erreur dans la récupération de Loan via l'ID : " + pId);
-            return returnError(pE.getCause().getMessage());
+            return returnError(Message.getText().getString("message.error.null"));
         }
 
         if (getSessionMemberToLoanManagement(pHttpRequest).getId() != vLoan.getMember().getId()) {
-            return returnError("Vous n'êtes pas le propriétaire");
+            return returnError(Message.getText().getString("message.error.unauthorized"));
         }
 
         if (vLoan.isReturned()) {
-            return returnError("Déjà prolongé");
+            return returnError(Message.getText().getString("message.error.already.extended"));
         }
 
         vReturnLoanRequest.setLoan(vLoan);
@@ -191,11 +193,11 @@ public class LoanController extends AbstractController {
         try {
             vReturnLoanResponse = loanManagementClientService.returnLoan(vReturnLoanRequest);
         } catch (ConvertException pConvertEx) {
-            logger.error("postExtendLoan/ConvertException: Erreur dans l'extension du prêt");
-            return returnError(pConvertEx.getCause().getMessage());
+            logger.error("postReturnLoan/ConvertException: Erreur dans le retour du prêt");
+            return returnError(Message.getText().getString("message.error.default"));
         } catch (ReturnException pReturnEx) {
-            logger.error("postExtendLoan/ExtendException: Erreur dans l'extension du prêt");
-            return returnError(pReturnEx.getCause().getMessage());
+            logger.error("postReturnLoan/ConvertException: Erreur dans le retour du prêt");
+            return returnError(Message.getText().getString("message.error.default"));
         }
 
         return new ModelAndView("redirect:/loans/details/" + vLoan.getId(), "loan", vReturnLoanResponse.getLoan());

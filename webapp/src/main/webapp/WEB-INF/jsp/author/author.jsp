@@ -31,7 +31,7 @@
                             <div class="menu">
                                 <ul class="menu-list">
                                     <c:forEach items="${books}" var="book">
-                                        <li class="list-content"><a href="${pageContext.request.contextPath}/books/details/${book.id}">${book.title} (${book.publicationDate.getDay()}-${book.publicationDate.getMonth()}-${book.publicationDate.getYear()})</a></li>
+                                        <li class="list-content"><a href="${pageContext.request.contextPath}/books/details/${book.id}">${book.title} (${book.publicationDate.getYear()})</a></li>
                                     </c:forEach>
                                 </ul>
                             </div>
@@ -66,6 +66,6 @@
 </div>
 
 <!-- Load JavaScript file -->
-<script src="js/scripts.js"></script>
+<script src="<c:url value="/resources/js/script.js" />"></script>
 </body>
 </html>

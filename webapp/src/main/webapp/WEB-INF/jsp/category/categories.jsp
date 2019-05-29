@@ -47,6 +47,6 @@
 </div>
 
 <!-- Load JavaScript file -->
-<script src="js/scripts.js"></script>
+<script src="<c:url value="/resources/js/script.js" />"></script>
 </body>
 </html>

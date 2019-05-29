@@ -68,7 +68,7 @@ public class BookController extends AbstractController {
             vResponse = bookManagementClientService.findAll(new FindAllRequest());
         } catch (ConvertException pE) {
             logger.error("getAllBooks: Erreur dans la récupération des objets Book");
-            return new ModelAndView("redirect:/error", "message", pE.getFaultInfo());
+            return returnError(Message.getText().getString("message.error.default"));
         }
 
         return new ModelAndView("book/books", "books", vResponse.getBooks());
@@ -91,7 +91,8 @@ public class BookController extends AbstractController {
         FindByIdRequest vResquest = new FindByIdRequest();
 
         if (pId < 0) {
-            return new ModelAndView("redirect:/error", "message", Message.getText().getString("message.error.id"));
+            logger.error("getBookDetails: Erreur de récupération de l'objet Book : ID invalide");
+            return returnError(Message.getText().getString("message.error.id"));
         }
 
         vResquest.setId(pId);
@@ -101,11 +102,11 @@ public class BookController extends AbstractController {
             vResponse = bookManagementClientService.findById(vResquest);
         } catch (ConvertException pE) {
             logger.error("getBookDetails: Erreur dans l'objet la requête FindById, " + pE.getFaultInfo().getFault().getFaultString());
-            return new ModelAndView("redirect:/error", "message", pE.getFaultInfo());
+            return returnError(Message.getText().getString("message.error.null"));
         }
 
         if (vResponse.getBook() == null) {
-            return new ModelAndView("redirect:/error", "message", "Aucun livre n'a été trouvé");
+            return returnError(Message.getText().getString("message.error.null"));
         }
 
         ModelAndView vView = new ModelAndView("book/book");

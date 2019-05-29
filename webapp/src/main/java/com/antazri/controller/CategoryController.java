@@ -13,10 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -105,7 +103,8 @@ public class CategoryController extends AbstractController {
         FindByCategoryResponse vFindByCategoryResponse;
 
         if (pId < 0) {
-            return new ModelAndView("redirect:/error", "message", Message.getText().getString("message.error.id"));
+            logger.error("getCategoryDetails: Erreur de récupération de l'objet Category : ID invalide");
+            return returnError(Message.getText().getString("message.error.id"));
         }
 
         vRequest.setId(pId);

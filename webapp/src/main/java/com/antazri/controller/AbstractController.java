@@ -21,9 +21,10 @@ public class AbstractController {
      * @return un objet ModelAndView correspondant à la page
      */
     protected ModelAndView returnError(String pMessage) {
-        ModelAndView mv = new ModelAndView("redirect:/error");
-        mv.addObject("message", pMessage);
-        return mv;
+        logger.error("Renvoi vers la page ERROR avec le message : " + pMessage);
+        ModelAndView modelAndView = new ModelAndView("redirect:/error");
+        modelAndView.addObject("message", pMessage);
+        return modelAndView;
     }
 
     /**

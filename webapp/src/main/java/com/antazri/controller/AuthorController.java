@@ -105,7 +105,7 @@ public class AuthorController extends AbstractController {
             vAuthor = getAuthorFromId(pId);
         } catch (Exception pE) {
             logger.error("getAuthorById: Erreur dans la récupération de l'objet via ID");
-            return returnError(Message.getText().getString("message.error.notvalid.element"));
+            return returnError(Message.getText().getString("message.error.null"));
         }
 
         if (vAuthor == null) {
@@ -146,7 +146,7 @@ public class AuthorController extends AbstractController {
             vRequest.setAuthor(pAuthor);
             vResponse = authorManagementClientService.addAuthor(vRequest);
         } catch (ConvertException pE) {
-            logger.error("postAddAuthor: Erreur dans l'objet Author envoyé dans la requête, " + pE.getFaultInfo().getFault().getFaultString());
+            logger.error("postAddAuthor: Erreur dans l'objet Author envoyé dans la requête, " + pE.getFaultInfo().getFault().getFaultString().getFault().getFaultString());
             return returnError(Message.getText().getString("message.error.null"));
         }
 
@@ -178,7 +178,7 @@ public class AuthorController extends AbstractController {
             vRequest.setAuthor(pAuthor);
             vResponse = authorManagementClientService.updateAuthor(vRequest);
         } catch (ConvertException pE) {
-            logger.error("postUpdateAuthor: Erreur dans l'objet Author envoyé dans la requête, " + pE.getFaultInfo().getFault().getFaultString());
+            logger.error("postUpdateAuthor: Erreur dans l'objet Author envoyé dans la requête, " + pE.getFaultInfo().getFault().getFaultString().getFault().getFaultString());
             return returnError(Message.getText().getString("message.error.null"));
         }
 
@@ -199,7 +199,7 @@ public class AuthorController extends AbstractController {
         try {
             vResponse = authorManagementClientService.deleteAuthor(vRequest);
         } catch (ConvertException pE) {
-            logger.error("postDeleteAuthor: Erreur dans l'objet Author envoyé dans la requête, " + pE.getFaultInfo().getFault().getFaultString());
+            logger.error("postDeleteAuthor: Erreur dans l'objet Author envoyé dans la requête, " + pE.getFaultInfo().getFault().getFaultString().getFault().getFaultString());
             return returnError(Message.getText().getString("message.error.notvalid.element"));
         }
 
@@ -217,21 +217,24 @@ public class AuthorController extends AbstractController {
      * @return un objet Author
      * @throws Exception
      */
-    private Author getAuthorFromId(int pId) throws Exception {
+    private Author getAuthorFromId(int pId) throws NullPointerException {
         FindByIdRequest vFindByIdRequest = new FindByIdRequest();
         FindByIdResponse vFindByIdResponse;
 
         if (pId < 0) {
-            throw new Exception(Message.getText().getString("message.error.id"));
+            throw new NullPointerException(Message.getText().getString("message.error.id"));
         }
 
         vFindByIdRequest.setId(pId);
 
         try {
             vFindByIdResponse = authorManagementClientService.findById(vFindByIdRequest);
+        } catch (NullPointerException pE) {
+            logger.error("getAllAuthors: Erreur dans le chargement de l'auteur avec l'ID: " + pId);
+            throw new NullPointerException(Message.getText().getString("message.error.notvalid.element"));
         } catch (ConvertException pE) {
             logger.error("getAllAuthors: Erreur dans le chargement des auteurs, " + pE.getFaultInfo().getFault().getFaultString());
-            throw new Exception(Message.getText().getString("message.error.notvalid.element"));
+            throw new NullPointerException(Message.getText().getString("message.error.notvalid.element"));
         }
 
         return vFindByIdResponse.getAuthor();

@@ -12,9 +12,9 @@
     <nav>
 
         <li><a href="${pageContext.request.contextPath}/loans"><i class="far fa-calendar-alt"></i> &nbsp;Mes emprunts</a></li>
-        <li><a href="${pageContext.request.contextPath}/books"><i class="fas fa-book"></i> &nbsp;Index des livres</a></li>
-        <li><a href="${pageContext.request.contextPath}/authors"><i class="fas fa-user"></i> &nbsp;Index des auteurs</a></li>
-        <li><a href="${pageContext.request.contextPath}/categories"><i class="fas fa-stream"></i> &nbsp;Livres par catégories</a></li>
+        <li><a href="${pageContext.request.contextPath}/books"><i class="fas fa-book"></i> &nbsp;Livres</a></li>
+        <li><a href="${pageContext.request.contextPath}/authors"><i class="fas fa-user"></i> &nbsp;Auteurs</a></li>
+        <li><a href="${pageContext.request.contextPath}/categories"><i class="fas fa-stream"></i> &nbsp;Catégories</a></li>
         <li><a href="${pageContext.request.contextPath}/search"><i class="fas fa-search"></i> &nbsp;Rechercher</a></li>
 
     </nav>

@@ -18,13 +18,14 @@
 
             <header>
 
-                <h1>Oups ! Il y a eu une erreur ...</h1>
+                <h1 id="error-message-title">Oups ! Il y a eu une erreur ... </h1>
+                <h2 id="error-message">${message}</h2>
 
             </header>
 
             <article>
 
-                <p>${message}</p>
+                <a href="${pageContext.request.contextPath}/">Retour</a>
 
             </article>
 
@@ -37,6 +38,9 @@
 </div>
 
 </div>
+
+<!-- Load JavaScript file -->
+<script src="<c:url value="/resources/js/script.js" />"></script>
 
 </body>
 </html>

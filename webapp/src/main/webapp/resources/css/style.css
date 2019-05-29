@@ -105,15 +105,14 @@ a:hover {
 
 #navSide nav {
     flex: 8;
-    list-style:none;
 }
 
 #navSide nav > li {
     font-weight: bold;
     font-size: 1.1em;
-    width:100%;
+    width: 100%;
     display: inline-flex;
-    padding:20px 10px;
+    padding: 20px 10px;
 }
 
 #navSide a {
@@ -136,7 +135,7 @@ a:hover {
 
 .list-content {
     margin: 3px 0;
-    padding: 5px;
+    padding: 5px 0;
     font-weight: 500;
     font-size: 1.1em;
 }
@@ -145,8 +144,17 @@ a:hover {
     color: #DAA520;
 }
 
-.add-list-style {
-    list-style-type: disc;
+.menu-list {
+    margin: 0;
+}
+
+#error-message-title {
+    margin: 50px 0 0 0;
+}
+
+#error-message {
+    font-size: 2em;
+    margin: 5px 0;
 }
 
 /** FOOTER **/

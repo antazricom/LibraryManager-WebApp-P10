@@ -53,17 +53,4 @@ public class HomeController extends AbstractController {
 
         return new ModelAndView("redirect:/auth","identifiants", new DoLoginRequest());
     }
-
-    /**
-     * La méthode getError gère le renvoi de l'utilisateur vers une page d'erreur globale pour l'application
-     * @param pModel
-     * @param pMessage
-     * @return un objet ModelAndView correspondant à la page d'erreur
-     */
-    @RequestMapping(value = "error")
-    public ModelAndView getError(Model pModel, @ModelAttribute("message") String pMessage) {
-        ModelAndView modelAndView = new ModelAndView("error");
-        modelAndView.addObject("message", pMessage);
-        return modelAndView;
-    }
 }

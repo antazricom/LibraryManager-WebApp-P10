@@ -72,4 +72,9 @@ public class LoanManagementClientService extends LoanManagementService implement
     public FindAllResponse findAll(FindAllRequest parameters) throws ConvertException {
         return getLoanManagementPort().findAll(parameters);
     }
+
+    @Override
+    public GetMaximumExtensionResponse getMaximumExtension(GetMaximumExtensionRequest parameters) {
+        return getLoanManagementPort().getMaximumExtension(parameters);
+    }
 }

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * La classe LoanController gère l'accès et l'affichage des pages liées à la rubrique "./loans"
@@ -86,6 +88,7 @@ public class LoanController extends AbstractController {
      */
     @RequestMapping("/details/{id}")
     public ModelAndView getLoanDetails(@PathVariable("id") int pId, HttpServletRequest pHttpRequest, Model pModel) {
+        ModelAndView modelAndView = new ModelAndView("loan/loan");
         if (!checkSession(pHttpRequest)) {
             return new ModelAndView("redirect:/auth","identifiants", new DoLoginRequest());
         }
@@ -104,7 +107,19 @@ public class LoanController extends AbstractController {
             return returnError(Message.getText().getString("message.error.unauthorized"));
         }
 
-        return new ModelAndView("loan/loan", "loan", vLoan);
+        /**
+         * Get Maximum Extension config through GetMaximumExtension operation
+         */
+        GetMaximumExtensionResponse getMaximumExtensionResponse = loanManagementClientService.getMaximumExtension(new GetMaximumExtensionRequest());
+
+        Extension extension = new Extension();
+        extension.setSelectExtension(0);
+        extension.setMaxExtension(getMaximumExtensionResponse.getExtension());
+
+        modelAndView.addObject("loan", vLoan);
+        modelAndView.addObject("extension", extension);
+
+        return modelAndView;
     }
 
     /**
@@ -114,8 +129,9 @@ public class LoanController extends AbstractController {
      * @param pModel
      * @return un objet ModelAndView correspondant à la page principale "loan.jsp" avec un objet Loan en attribut
      */
-    @RequestMapping("/extend/{id}")
-    public ModelAndView getExtendLoan(@PathVariable("id") int pId, HttpServletRequest pHttpRequest, Model pModel) {
+    @RequestMapping(value = "/details/{id}/extend", method = RequestMethod.POST)
+    public ModelAndView getExtendLoan(@PathVariable("id") int pId, HttpServletRequest pHttpRequest, Model pModel,
+                                      @ModelAttribute("extension") Extension pExtension) {
         if (!checkSession(pHttpRequest)) {
             return new ModelAndView("redirect:/auth","identifiants", new DoLoginRequest());
         }
@@ -141,6 +157,7 @@ public class LoanController extends AbstractController {
         }
 
         vRequest.setLoan(vLoan);
+        vRequest.setExtension(pExtension.getSelectExtension());
 
         try {
             vResponse = loanManagementClientService.extendLoan(vRequest);

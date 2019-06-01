@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@include file="../../_include/header.jsp" %>
 
@@ -104,16 +105,35 @@
                 <article>
 
                     <c:choose>
-                        <c:when test="${loan.extended == false}">
-                            <p><span class="has-text-weight-light"> Le prêt sera étendu d'un mois à partir du :  </span>
-                                <b>${loan.dateEnd.getDay()}/${loan.dateEnd.getMonth()}/${loan.dateEnd.getYear()}</b></p>
+                        <c:when test="${loan.returned == false}">
 
-                            <a href="${pageContext.request.contextPath}/loans/extend/${loan.id}">
-                                <button class="button is-primary">Prolonger</button></a>
+                            <c:choose>
+                                <c:when test="${loan.extended == false}">
+                                    <p><span class="has-text-weight-light"> Le prêt sera étendu du nombre de jours sélectionné à partir du :  </span>
+                                        <b>${loan.dateEnd.getDay()}/${loan.dateEnd.getMonth()}/${loan.dateEnd.getYear()}</b></p>
+
+                                    <form:form action="./${loan.id}/extend" modelAttribute="extension" method="post">
+                                        <div class="field">
+                                            <div class="select">
+                                                <form:select path="selectExtension">
+                                                    <c:forEach var="item" begin="1" end="${extension.maxExtension}">
+                                                        <form:option value="${item}">${item}</form:option>
+                                                    </c:forEach>
+                                                </form:select>
+                                            </div>
+                                            <form:button class="button is-primary">Prolonger</form:button>
+                                        </div>
+                                    </form:form>
+
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="button is-danger" disabled>Le prêt a déjà été prolongé jusqu'au&nbsp;:&nbsp;<b>${loan.dateEnd.getDay()}/${loan.dateEnd.getMonth()}/${loan.dateEnd.getYear()}</b></button>
+                                </c:otherwise>
+                            </c:choose>
 
                         </c:when>
                         <c:otherwise>
-                            <button class="button is-danger" disabled>le prêt a déjà été prolongé</button>
+                            <button class="button is-danger" disabled>Le prêt a été rendu et ne peut pas être prolongé</button>
                         </c:otherwise>
                     </c:choose>
 

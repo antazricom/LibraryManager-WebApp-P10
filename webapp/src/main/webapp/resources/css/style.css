@@ -133,6 +133,15 @@ a:hover {
     overflow: visible;
 }
 
+#contentSide article {
+    margin: 40px 0 0 0;
+}
+
+.list-with-border {
+    padding: 5px 0 0 0;
+    border-bottom: #efefef 1px solid;
+}
+
 .list-content {
     margin: 3px 0;
     padding: 5px 0;
@@ -155,6 +164,28 @@ a:hover {
 #error-message {
     font-size: 2em;
     margin: 5px 0;
+}
+
+/** ADMIN PANEL **/
+.admin-nav {
+    margin: 20px 0 0 0;
+    list-style: none;
+}
+
+.admin-nav-btn {
+    height: 50px;
+}
+
+.button-on-title {
+    margin: 10px 0 0 0;
+}
+
+.has-text-ocre {
+    color: #DAA520;
+}
+
+.button-cancel {
+    margin: 5px 0 0 0;
 }
 
 /** FOOTER **/

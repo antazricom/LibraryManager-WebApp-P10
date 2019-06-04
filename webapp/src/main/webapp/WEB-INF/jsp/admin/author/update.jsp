@@ -2,18 +2,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<%@include file="../../_include/header.jsp" %>
+<%@include file="../../../_include/header.jsp" %>
 
 <body>
-<%@include file="../../_include/iecondition.jsp" %>
+<%@include file="../../../_include/iecondition.jsp" %>
 
 <div id="container">
 
-    <%@include file="../../_include/topbar.jsp" %>
+    <%@include file="../../../_include/topbar.jsp" %>
 
     <div id="wrapper" class="columns">
 
-        <%@include file="../../_include/aside_nav.jsp" %>
+        <%@include file="../../../_include/aside_nav.jsp" %>
 
         <div id="contentSide" class="column is-two-thirds">
 
@@ -21,14 +21,14 @@
 
                 <header>
 
-                    <h1>Mettre à jour : ${book.title}</h1>
+                    <h1>Mettre à jour : ${author.firstname} ${author.lastname}</h1>
 
                 </header>
 
                 <article>
 
-                    <form:form action="${pageContext.request.contextPath}/books/updating" method="POST" modelAttribute="book">
-                        <form:hidden path="id" id="${book.id}" />
+                    <form:form action="${pageContext.request.contextPath}/authors/updating" method="POST" modelAttribute="author">
+                        <form:hidden path="id" id="${author.id}" />
 
                         <div class="field">
                             <form:label path="lastname" class="label">Nom :</form:label>

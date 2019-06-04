@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@include file="../../_include/header.jsp" %>
 
@@ -20,20 +21,18 @@
 
                 <header>
 
-                    <h1>Liste des auteurs</h1>
+                    <h1>Interface d'administration</h1>
 
                 </header>
 
                 <article>
-
-                    <div class="menu">
-                        <ul class="menu-list">
-                            <c:forEach items="${authors}" var="author">
-                                <li class="list-content list-with-border"><a href="./details/${author.id}">${author.firstname} ${author.lastname}</a></li>
-                            </c:forEach>
-                        </ul>
-                    </div>
-
+                    <nav class="admin-nav">
+                        <li>
+                            <a href="${pageContext.request.contextPath}/admin/members">
+                                <button class="button admin-nav-btn is-primary is-fullwidth is-large">Gestion des membres</button>
+                            </a>
+                        </li>
+                    </nav>
                 </article>
 
             </section>
@@ -48,5 +47,6 @@
 
 <!-- Load JavaScript file -->
 <script src="<c:url value="/resources/js/script.js" />"></script>
+
 </body>
 </html>

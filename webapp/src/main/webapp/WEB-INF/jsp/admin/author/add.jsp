@@ -2,18 +2,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<%@include file="../../_include/header.jsp" %>
+<%@include file="../../../_include/header.jsp" %>
 
 <body>
-<%@include file="../../_include/iecondition.jsp" %>
+<%@include file="../../../_include/iecondition.jsp" %>
 
 <div id="container">
 
-    <%@include file="../../_include/topbar.jsp" %>
+    <%@include file="../../../_include/topbar.jsp" %>
 
     <div id="wrapper" class="columns">
 
-        <%@include file="../../_include/aside_nav.jsp" %>
+        <%@include file="../../../_include/aside_nav.jsp" %>
 
         <div id="contentSide" class="column is-two-thirds">
 

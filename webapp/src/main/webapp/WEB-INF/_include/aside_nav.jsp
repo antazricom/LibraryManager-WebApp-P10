@@ -16,6 +16,9 @@
         <li><a href="${pageContext.request.contextPath}/authors"><i class="fas fa-user"></i> &nbsp;Auteurs</a></li>
         <li><a href="${pageContext.request.contextPath}/categories"><i class="fas fa-stream"></i> &nbsp;Catégories</a></li>
         <li><a href="${pageContext.request.contextPath}/search"><i class="fas fa-search"></i> &nbsp;Rechercher</a></li>
+        <c:if test="${member.status == 'admin'}">
+            <li><a href="${pageContext.request.contextPath}/admin"><i class="fas fa-user-shield"></i> &nbsp;Administration</a></li>
+        </c:if>
 
     </nav>
 

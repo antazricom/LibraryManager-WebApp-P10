@@ -36,4 +36,12 @@ public class MemberManagementClientService extends MemberManagementService imple
     public FindAllResponse findAll(FindAllRequest parameters) throws ConvertException {
         return getMemberManagementPort().findAll(parameters);
     }
+
+//    public boolean checkConfirmedPassword(String pPassword, String pConfirmedPassword) {
+//        if (pPassword.equals(pConfirmedPassword)) {
+//            return true;
+//        }
+//
+//        return false;
+//    }
 }

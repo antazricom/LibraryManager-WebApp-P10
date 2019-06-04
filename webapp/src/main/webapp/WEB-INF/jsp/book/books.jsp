@@ -29,7 +29,7 @@
                     <div class="menu">
                         <ul class="menu-list">
                             <c:forEach items="${books}" var="book">
-                                <li class="list-content"><a href="${pageContext.request.contextPath}/books/details/${book.id}">${book.title} (${book.author.firstname} ${book.author.lastname})</a></li>
+                                <li class="list-content list-with-border"><a href="${pageContext.request.contextPath}/books/details/${book.id}">${book.title} (${book.author.firstname} ${book.author.lastname})</a></li>
                             </c:forEach>
                         </ul>
                     </div>

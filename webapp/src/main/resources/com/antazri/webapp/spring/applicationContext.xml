@@ -22,5 +22,10 @@
     <bean id="authorController" class="com.antazri.controller.AuthorController" />
     <bean id="bookController" class="com.antazri.controller.BookController" />
     <bean id="categoryController" class="com.antazri.controller.CategoryController" />
+    <bean id="adminController" class="com.antazri.controller.AdminController" />
+    <bean id="errorController" class="com.antazri.controller.ErrorController" />
+    <bean id="loanController" class="com.antazri.controller.LoanController" />
+    <bean id="memberController" class="com.antazri.controller.MemberController" />
+    <bean id="searchController" class="com.antazri.controller.SearchController" />
 
 </beans>

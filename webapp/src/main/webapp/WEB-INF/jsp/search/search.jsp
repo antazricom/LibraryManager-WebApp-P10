@@ -28,7 +28,7 @@
                     <form:form action="${pageContext.request.contextPath}/search/results" method="GET" modelAttribute="request">
                         <div class="field has-addons">
                             <div class="control is-expanded has-icons-left">
-                                <form:input path="title" class="input is-medium" type="text" name="request" id="request" placeholder="Quel livre recherchez-vous ?" required/>
+                                <form:input path="title" class="input is-medium" type="text" name="request" id="request" placeholder="Quel livre recherchez-vous ?" required="required" />
                                 <span class="icon is-small is-left">
                           <i class="fas fa-search"></i>
                         </span>

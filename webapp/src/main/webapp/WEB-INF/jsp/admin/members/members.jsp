@@ -38,22 +38,20 @@
                     <div class="menu">
                         <ul class="menu-list">
                             <c:forEach var="member" items="${members}">
-                                <c:if test="${member.status != 'admin'}">
-                                    <li class="list-content">
-                                        <div class="list-with-border columns">
-                                            <div class="column is-three-fifths">
-                                                <a disabled="disabled">
-                                                    ${member.lastname}, ${member.firstname} (${member.login})
-                                                </a>
-                                            </div>
-                                            <div class="column is-one-fifth">
-                                                <a href="${pageContext.request.contextPath}/admin/members/update/${member.id}">
-                                                    <i class="far fa-edit"></i> &nbsp; Modifier
-                                                </a>
-                                            </div>
+                                <li class="list-content">
+                                    <div class="list-with-border columns">
+                                        <div class="column is-three-fifths">
+                                            <a disabled="disabled">
+                                                ${member.lastname}, ${member.firstname} (${member.login})
+                                            </a>
                                         </div>
-                                    </li>
-                                </c:if>
+                                        <div class="column is-one-fifth">
+                                            <a href="${pageContext.request.contextPath}/admin/members/update/${member.id}">
+                                                <i class="far fa-edit"></i> &nbsp; Modifier
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
                             </c:forEach>
                         </ul>
                     </div>

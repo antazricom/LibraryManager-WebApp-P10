@@ -1,6 +1,7 @@
 package com.antazri.service.impl;
 
 import com.antazri.generated.member.*;
+import com.antazri.service.utils.HashPasswordUtils;
 
 import javax.xml.namespace.QName;
 import java.net.URL;
@@ -9,6 +10,7 @@ public class MemberManagementClientService extends MemberManagementService imple
 
     @Override
     public AddMemberResponse addMember(AddMemberRequest parameters) throws ConvertException {
+        parameters.getMember().setPassword(HashPasswordUtils.hashPassword(parameters.getMember().getPassword()));
         return getMemberManagementPort().addMember(parameters);
     }
 

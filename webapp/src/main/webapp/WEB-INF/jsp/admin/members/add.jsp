@@ -27,7 +27,7 @@
 
                 <article>
 
-                    <form:form action="${pageContext.request.contextPath}/admin/members/adding" method="POST" modelAttribute="member">
+                    <form:form action="${pageContext.request.contextPath}/admin/members/adding" method="POST" modelAttribute="newmember">
                         <div class="field">
                             <form:label path="lastname" class="label">Nom :</form:label>
                             <div class="control">

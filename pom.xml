@@ -41,6 +41,7 @@
         <cxf.version>3.2.6</cxf.version>
         <log4j.version>2.11.1</log4j.version>
         <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
+        <jbcrypt.version>0.4</jbcrypt.version>
     </properties>
 
     <!-- =============================================================== -->
@@ -121,6 +122,13 @@
                 <groupId>jstl</groupId>
                 <artifactId>jstl</artifactId>
                 <version>${jstl.version}</version>
+            </dependency>
+
+            <!-- BCrypt dependency -->
+            <dependency>
+                <groupId>org.mindrot</groupId>
+                <artifactId>jbcrypt</artifactId>
+                <version>${jbcrypt.version}</version>
             </dependency>
 
             <!-- Log4J 2 dependencies -->

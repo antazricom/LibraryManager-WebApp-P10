@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,7 +40,7 @@ public class AdminController extends AbstractController {
         }
 
         if (!checkAdmin(pRequest)) {
-            return new ModelAndView("redirect:/error","message", Message.getText().getString("message.error.unauthorized"));
+            return returnError(Message.getText().getString("message.error.unauthorized"));
         }
 
         return new ModelAndView("admin/admin");
@@ -61,7 +60,7 @@ public class AdminController extends AbstractController {
         }
 
         if (!checkAdmin(pRequest)) {
-            return new ModelAndView("redirect:/error", "message", Message.getText().getString("message.error.unauthorized"));
+            return returnError(Message.getText().getString("message.error.unauthorized"));
         }
 
         List<com.antazri.generated.member.Member> members;
@@ -89,11 +88,11 @@ public class AdminController extends AbstractController {
         }
 
         if (!checkAdmin(pRequest)) {
-            return new ModelAndView("redirect:/error", "message", Message.getText().getString("message.error.unauthorized"));
+            return returnError(Message.getText().getString("message.error.unauthorized"));
         }
 
         ModelAndView modelAndView = new ModelAndView("admin/members/add");
-        modelAndView.addObject("member", new com.antazri.generated.member.Member());
+        modelAndView.addObject("newmember", new com.antazri.generated.member.Member());
         modelAndView.addObject("confirmedPassword", "");
 
         return modelAndView;
@@ -108,19 +107,22 @@ public class AdminController extends AbstractController {
      */
     @RequestMapping(value = "/members/adding", method = RequestMethod.POST)
     public ModelAndView processAddMember(HttpServletRequest pRequest,
-                                         @ModelAttribute("member")com.antazri.generated.member.Member pMember,
+                                         @ModelAttribute("newmember")com.antazri.generated.member.Member pMember,
                                          Model pModel,
                                          BindingResult pBindingResult) {
         if (!checkSession(pRequest)) {
+            logger.error("Not connected");
             return new ModelAndView("redirect:/auth", "identifiants", new DoLoginRequest());
         }
 
         if (!checkAdmin(pRequest)) {
-            return new ModelAndView("redirect:/error", "message", Message.getText().getString("message.error.unauthorized"));
+            logger.error("Not authorized");
+            return returnError(Message.getText().getString("message.error.unauthorized"));
         }
 
         if (pBindingResult.hasErrors()) {
-            return new ModelAndView("redirect:/error", "message", Message.getText().getString("message.error.default"));
+            logger.error("BindingResult has errors" + pBindingResult.getAllErrors().toString());
+            return returnError(Message.getText().getString("message.error.default"));
         }
 
         AddMemberRequest addMemberRequest = new AddMemberRequest();
@@ -130,7 +132,7 @@ public class AdminController extends AbstractController {
             memberManagementClientService.addMember(addMemberRequest);
         } catch (ConvertException e) {
             logger.error("Erreur dans l'ajout de l'entité membre en paramètre de la requête : " + e.getMessage());
-            return new ModelAndView("redirect:/error", "message", Message.getText().getString("message.error.default"));
+            return returnError(Message.getText().getString("message.error.default"));
         }
 
         return new ModelAndView("redirect:/admin/members");
@@ -150,7 +152,7 @@ public class AdminController extends AbstractController {
         }
 
         if (!checkAdmin(pRequest)) {
-            return new ModelAndView("redirect:/error", "message", Message.getText().getString("message.error.unauthorized"));
+            return returnError(Message.getText().getString("message.error.unauthorized"));
         }
 
         FindByIdRequest parameters = new FindByIdRequest();
@@ -182,11 +184,11 @@ public class AdminController extends AbstractController {
         }
 
         if (!checkAdmin(pRequest)) {
-            return new ModelAndView("redirect:/error", "message", Message.getText().getString("message.error.unauthorized"));
+            return returnError(Message.getText().getString("message.error.unauthorized"));
         }
 
         if (pBindingResult.hasErrors()) {
-            return new ModelAndView("redirect:/error", "message", Message.getText().getString("message.error.default"));
+            return returnError(Message.getText().getString("message.error.default"));
         }
 
         UpdateMemberRequest updateMemberRequest = new UpdateMemberRequest();
@@ -196,7 +198,7 @@ public class AdminController extends AbstractController {
             memberManagementClientService.updateMember(updateMemberRequest);
         } catch (ConvertException e) {
             logger.error("Erreur dans la mise à jour de l'entité membre en paramètre de la requête : " + e.getMessage());
-            return new ModelAndView("redirect:/error", "message", Message.getText().getString("message.error.default"));
+            return returnError(Message.getText().getString("message.error.default"));
         }
 
         return new ModelAndView("redirect:/admin/members");
@@ -211,7 +213,7 @@ public class AdminController extends AbstractController {
         }
 
         if (!checkAdmin(pRequest)) {
-            return new ModelAndView("redirect:/error", "message", Message.getText().getString("message.error.unauthorized"));
+            return returnError(Message.getText().getString("message.error.unauthorized"));
         }
 
         FindByIdRequest findByIdRequest = new FindByIdRequest();
@@ -223,14 +225,14 @@ public class AdminController extends AbstractController {
             deleteMemberRequest.setMember(memberManagementClientService.findById(findByIdRequest).getMember());
         } catch (ConvertException e) {
             logger.error("Erreur dans la récupération de l'entité membre en paramètre de la requête : " + e.getMessage());
-            return new ModelAndView("redirect:/error", "message", Message.getText().getString("message.error.default"));
+            return returnError(Message.getText().getString("message.error.default"));
         }
 
         try {
             memberManagementClientService.deleteMember(deleteMemberRequest);
         } catch (ConvertException e) {
             logger.error("Erreur dans la suppression de l'entité membre en paramètre de la requête : " + e.getMessage());
-            return new ModelAndView("redirect:/error", "message", Message.getText().getString("message.error.default"));
+            return returnError(Message.getText().getString("message.error.default"));
         }
 
         return new ModelAndView("redirect:/admin/members");

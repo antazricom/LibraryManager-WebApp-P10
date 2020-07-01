@@ -39,7 +39,7 @@
         <jstl.version>1.2</jstl.version>
         <junit.version>4.11</junit.version>
         <cxf.version>3.2.6</cxf.version>
-        <log4j.version>2.11.1</log4j.version>
+        <log4j.version>2.13.3</log4j.version>
         <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
         <jbcrypt.version>0.4</jbcrypt.version>
     </properties>

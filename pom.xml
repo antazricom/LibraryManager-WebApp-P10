@@ -37,7 +37,7 @@
         <lang3.version>3.8.1</lang3.version>
         <servlet.api.version>3.1.0</servlet.api.version>
         <jstl.version>1.2</jstl.version>
-        <junit.version>4.11</junit.version>
+        <junit.version>4.13.1</junit.version>
         <cxf.version>3.2.6</cxf.version>
         <log4j.version>2.11.1</log4j.version>
         <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
